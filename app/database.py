@@ -1,6 +1,7 @@
+import json
 import sqlite3
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
 
 DATABASE_PATH = Path(__file__).parent / "interviewiq.db"
 
@@ -15,22 +16,21 @@ def initialize_database():
     with connection() as db:
         db.executescript("""
         CREATE TABLE IF NOT EXISTS interviews (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            role TEXT NOT NULL,
-            started_at TEXT NOT NULL,
-            completed_at TEXT,
-            overall_score REAL
+            id INTEGER PRIMARY KEY AUTOINCREMENT, role TEXT NOT NULL,
+            started_at TEXT NOT NULL, completed_at TEXT, overall_score REAL
         );
         CREATE TABLE IF NOT EXISTS answers (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            interview_id INTEGER NOT NULL,
-            question_index INTEGER NOT NULL,
-            question TEXT NOT NULL,
-            answer TEXT NOT NULL,
-            score REAL NOT NULL,
-            similarity REAL NOT NULL,
-            feedback TEXT NOT NULL,
+            id INTEGER PRIMARY KEY AUTOINCREMENT, interview_id INTEGER NOT NULL,
+            question_index INTEGER NOT NULL, question TEXT NOT NULL, answer TEXT NOT NULL,
+            score REAL NOT NULL, similarity REAL NOT NULL, feedback TEXT NOT NULL,
             FOREIGN KEY(interview_id) REFERENCES interviews(id)
+        );
+        CREATE TABLE IF NOT EXISTS interview_questions (
+            id INTEGER PRIMARY KEY AUTOINCREMENT, interview_id INTEGER NOT NULL,
+            question_index INTEGER NOT NULL, question TEXT NOT NULL,
+            reference_answer TEXT NOT NULL, keywords TEXT NOT NULL,
+            FOREIGN KEY(interview_id) REFERENCES interviews(id),
+            UNIQUE(interview_id, question_index)
         );
         """)
 
@@ -39,6 +39,25 @@ def create_interview(role: str) -> int:
     with connection() as db:
         cursor = db.execute("INSERT INTO interviews (role, started_at) VALUES (?, ?)", (role, datetime.now().isoformat(timespec="seconds")))
         return cursor.lastrowid
+
+
+def save_interview_questions(interview_id: int, questions: list[dict]):
+    with connection() as db:
+        db.executemany(
+            """INSERT INTO interview_questions (interview_id, question_index, question, reference_answer, keywords)
+               VALUES (?, ?, ?, ?, ?)""",
+            [(interview_id, i, item["question"], item["reference"], json.dumps(item["keywords"])) for i, item in enumerate(questions)],
+        )
+
+
+def get_interview_question(interview_id: int, question_index: int):
+    with connection() as db:
+        row = db.execute("SELECT * FROM interview_questions WHERE interview_id = ? AND question_index = ?", (interview_id, question_index)).fetchone()
+        if not row:
+            return None
+        item = dict(row)
+        item["keywords"] = json.loads(item["keywords"])
+        return item
 
 
 def save_answer(interview_id, question_index, question, answer, score, similarity, feedback):

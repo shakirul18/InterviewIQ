@@ -1,3 +1,4 @@
+import random
 from pathlib import Path
 from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
@@ -40,10 +41,12 @@ def roles():
 
 @app.post("/api/interviews")
 def start_interview(data: StartRequest):
-    questions = get_questions(data.role)
-    if not questions:
+    question_bank = get_questions(data.role)
+    if not question_bank:
         raise HTTPException(status_code=404, detail="Unknown job role")
     interview_id = database.create_interview(data.role)
+    questions = random.sample(question_bank, k=min(5, len(question_bank)))
+    database.save_interview_questions(interview_id, questions)
     return {"interview_id": interview_id, "role": data.role, "questions": [{"index": i, "question": q["question"]} for i, q in enumerate(questions)]}
 
 
@@ -52,11 +55,10 @@ def submit_answer(data: AnswerRequest):
     interview, _ = database.interview_report(data.interview_id)
     if not interview:
         raise HTTPException(status_code=404, detail="Interview not found")
-    questions = get_questions(interview["role"])
-    if data.question_index >= len(questions):
+    item = database.get_interview_question(data.interview_id, data.question_index)
+    if not item:
         raise HTTPException(status_code=400, detail="Invalid question index")
-    item = questions[data.question_index]
-    result = evaluate_answer(data.answer, item["reference"], item["keywords"])
+    result = evaluate_answer(data.answer, item["reference_answer"], item["keywords"])
     database.save_answer(data.interview_id, data.question_index, item["question"], data.answer.strip(), result["score"], result["similarity"], result["feedback"])
     return result
 
