@@ -75,3 +75,13 @@ This is an NLP application, not a model-training project. A pretrained MiniLM mo
 - Voice answer input with browser speech recognition
 - More roles and a larger question bank
 - Optional cloud AI API for dynamic questions (keep the current local question bank as fallback)
+
+## Optional: train a model and see accuracy
+
+The web app uses semantic similarity for feedback, so it does not train a model or display a classification accuracy. For an AI Lab demonstration, the included labelled starter dataset supports a separate supervised-learning experiment:
+
+```powershell
+python train_classifier.py
+```
+
+The script trains an explainable TF-IDF + answer-length + Logistic Regression model on `data/training_answers.csv`, uses a fixed 70/30 train-test split, and prints accuracy plus a classification report. The labels are `weak`, `average`, and `strong`. This is a small curated starter dataset; add real, manually labelled interview responses before treating its score as a final research metric.
