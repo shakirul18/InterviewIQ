@@ -85,3 +85,5 @@ python train_classifier.py
 ```
 
 The script trains an explainable TF-IDF + answer-length + Logistic Regression model on `data/training_answers.csv`, uses a fixed 70/30 train-test split, and prints accuracy plus a classification report. The labels are `weak`, `average`, and `strong`. This is a small curated starter dataset; add real, manually labelled interview responses before treating its score as a final research metric.
+
+For a cell-by-cell Jupyter version, open `InterviewIQ_Model_Training.ipynb` in VS Code, select the `.venv` Python 3.11 kernel, and choose **Run All**.
