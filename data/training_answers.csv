@@ -1,0 +1,46 @@
+role,topic,answer,label
+Software Developer,OOP,"OOP is a programming style.",weak
+Software Developer,Python,"A tuple and list are different things.",weak
+Software Developer,Debugging,"I will try again until the program works.",weak
+Software Developer,API,"API is used in software.",weak
+Software Developer,Security,"Security is important for websites.",weak
+Data Analyst,Data Cleaning,"I will clean the bad data.",weak
+Data Analyst,Correlation,"Correlation is when data is connected.",weak
+Data Analyst,KPI,"KPI means performance.",weak
+Data Analyst,Visualization,"Charts help people understand data.",weak
+Data Analyst,SQL,"SQL is a database language.",weak
+HR Executive,Conflict,"I will tell them to stop fighting.",weak
+HR Executive,Recruitment,"I will hire the best candidate.",weak
+HR Executive,Engagement,"Employees should be happy.",weak
+HR Executive,Confidentiality,"HR information should be secret.",weak
+HR Executive,Feedback,"I will give the employee feedback.",weak
+Software Developer,OOP,"Object oriented programming uses objects and helps organize a program.",average
+Software Developer,Python,"Lists can be changed but tuples normally cannot be changed after creating them.",average
+Software Developer,Debugging,"First I check the output and error message, then test the code section that has the problem.",average
+Software Developer,API,"An API allows a frontend and backend application to communicate using requests and responses.",average
+Software Developer,Security,"I would validate user input and use login authentication to make the application safer.",average
+Data Analyst,Data Cleaning,"I check missing values and duplicates, fix incorrect formats, then review the cleaned data.",average
+Data Analyst,Correlation,"Correlation shows that variables change together, but it does not always mean one caused the other.",average
+Data Analyst,KPI,"A KPI is a measurable number that tells a business whether it is progressing toward a goal.",average
+Data Analyst,Visualization,"I use a bar chart for category comparison and a line chart for trends over time.",average
+Data Analyst,SQL,"SQL helps me select, filter and summarize information from a relational database.",average
+HR Executive,Conflict,"I would listen to both employees, understand the facts and help them agree on a respectful solution.",average
+HR Executive,Recruitment,"A clear job description, screening and structured interviews help find a suitable candidate fairly.",average
+HR Executive,Engagement,"Recognition, feedback and growth opportunities can help employees feel engaged at work.",average
+HR Executive,Confidentiality,"Confidentiality protects employee privacy and helps staff trust the HR department.",average
+HR Executive,Feedback,"I would explain the behavior, discuss how to improve and arrange a follow-up conversation.",average
+Software Developer,OOP,"Object-oriented programming models a system as objects that contain data and behavior. Encapsulation protects internal state, inheritance supports reuse and polymorphism allows flexible behavior, which makes code easier to maintain.",strong
+Software Developer,Python,"Lists are mutable, so I can add, remove or replace items. Tuples are immutable after creation, so I use them for fixed values and lists for collections that need to change.",strong
+Software Developer,Debugging,"I first reproduce the defect and compare actual with expected output. I isolate the failing part using logs or a debugger, make a targeted fix, then test normal and edge cases to confirm there is no regression.",strong
+Software Developer,API,"An API is a contract that lets software services communicate. For example, a browser client can send an HTTP request to a backend endpoint and receive a JSON response without knowing the server implementation.",strong
+Software Developer,Security,"I would validate and sanitize input, enforce authentication and authorization, hash passwords, use HTTPS, parameterized database queries and security updates. These controls reduce risks such as SQL injection and cross-site scripting.",strong
+Data Analyst,Data Cleaning,"I inspect the source and data types, profile missing values and duplicates, standardize formats, investigate outliers and validate the final dataset against business rules. I also document each cleaning decision so the analysis is reproducible.",strong
+Data Analyst,Correlation,"Correlation measures whether two variables move together, while causation means one variable directly produces a change in another. A correlation is not proof of cause because a confounding factor may affect both variables.",strong
+Data Analyst,KPI,"A KPI is a clearly defined measurable value tied to a business objective. For example, monthly customer retention can track whether a service-improvement goal is working, provided the definition and reporting period are consistent.",strong
+Data Analyst,Visualization,"I begin with the audience and question. I use bars to compare categories, lines for time trends and scatter plots for relationships, then add clear labels and honest scales so the recommendation is easy to understand.",strong
+Data Analyst,SQL,"SQL is useful because it retrieves and combines data directly from relational tables. I can filter records, join related tables and aggregate metrics to create a reliable analysis dataset before building a report.",strong
+HR Executive,Conflict,"I would meet each employee privately, listen without taking sides and collect the facts. I would then facilitate respectful communication, agree practical actions, document the resolution and follow up to confirm the conflict is not continuing.",strong
+HR Executive,Recruitment,"I would begin with a precise job description and inclusive sourcing, then use consistent screening and structured interviews based on job-related criteria. Timely communication, documented decisions and a respectful candidate experience keep the process fair.",strong
+HR Executive,Engagement,"I would use surveys and regular conversations to understand concerns, then strengthen clear goals, recognition, manager support, learning opportunities and feedback. I would measure the result over time rather than assuming one activity improves engagement.",strong
+HR Executive,Confidentiality,"HR manages sensitive personal and performance information. Protecting confidentiality preserves privacy and employee trust, supports fair investigations and helps the organization meet its legal and ethical responsibilities.",strong
+HR Executive,Feedback,"I would give feedback privately and promptly, use specific observable behavior and explain its impact. After listening to the employee, I would agree improvement actions, offer support and schedule a follow-up to review progress.",strong

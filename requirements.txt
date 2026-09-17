@@ -1,0 +1,10 @@
+# InterviewIQ runtime + training dependencies
+# Python 3.14.x / Windows x64
+numpy==2.3.4
+scikit-learn==1.8.0
+pandas>=2.2,<3
+fastapi>=0.115,<1
+uvicorn[standard]>=0.34,<1
+openpyxl>=3.1,<4
+ipykernel>=6.29,<7
+matplotlib>=3.9,<4

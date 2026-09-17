@@ -1,0 +1,11 @@
+{
+  "records_used": 985,
+  "unique_questions": 20,
+  "unique_answers": 20,
+  "train_records": 738,
+  "test_records": 247,
+  "best_embedding": "TFIDF-SVD",
+  "best_fusion": "Early",
+  "best_macro_f1": 0.3302898991005175,
+  "architecture": "Separate Question/Answer Representations -> Early/Late Fusion -> MLP Neural Classifier"
+}

@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>InterviewIQ · AI Interview Practice</title>
+
+    <link rel="stylesheet" href="/static/style.css?v=10001">
+
+    <style>
+        /* =========================================
+           InterviewIQ - Evaluation Result
+        ========================================== */
+
+        .evaluation-category {
+            display: block;
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .evaluation-category.strong {
+            color: #62dfaa;
+        }
+
+        .evaluation-category.average {
+            color: #f4c95d;
+        }
+
+        .evaluation-category.weak {
+            color: #ff7b8a;
+        }
+
+        .feedback p {
+            margin: 0;
+            color: #d3f5e7;
+        }
+
+        .category-result {
+            font-size: 30px !important;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .performance-category {
+            text-transform: uppercase;
+        }
+
+        /* Hide ANY old score-based result card */
+        .score-result,
+        .evaluation-result,
+        .result-card,
+        .score-card {
+            display: none !important;
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- =========================================
+         BACKGROUND
+    ========================================== -->
+
+    <div class="aurora aurora-one"></div>
+    <div class="aurora aurora-two"></div>
+
+
+    <!-- =========================================
+         HEADER
+    ========================================== -->
+
+    <header class="topbar">
+
+        <a class="brand" href="/">
+            <span class="brand-mark">I</span>
+            Interview<span>IQ</span>
+        </a>
+
+        <div class="nav-actions">
+
+            <span class="local-pill">
+                <i></i>
+                Local AI
+            </span>
+
+            <button
+                id="historyButton"
+                class="text-button"
+                type="button">
+
+                History <span>↗</span>
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================================
+         MAIN
+    ========================================== -->
+
+    <main>
+
+
+        <!-- =====================================
+             WELCOME
+        ====================================== -->
+
+        <section
+            id="welcome"
+            class="welcome-view view-enter">
+
+            <div class="hero-copy">
+
+                <p class="eyebrow">
+                    <span class="spark">✦</span>
+                    AI-POWERED INTERVIEW PRACTICE
+                </p>
+
+                <h1>
+                    Turn practice into<br>
+                    <em>real confidence.</em>
+                </h1>
+
+                <p class="lead">
+                    Answer role-specific questions, receive meaningful
+                    feedback, and see exactly where to improve —
+                    all on your device.
+                </p>
+
+                <div class="trust-row">
+
+                    <span>
+                        ◉ Private by design
+                    </span>
+
+                    <span>
+                        ◉ Instant feedback
+                    </span>
+
+                    <span>
+                        ◉ 100% local
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- Start Card -->
+
+            <div class="start-card glass-card">
+
+                <div class="card-heading">
+
+                    <div class="icon-tile">
+                        ✦
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Start a new session
+                        </strong>
+
+                        <small>
+                            5 questions · fresh selection every time
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <label for="roleSelect">
+                    Choose your target role
+                </label>
+
+                <select id="roleSelect">
+                    <option disabled selected>
+                        Loading roles...
+                    </option>
+                </select>
+
+
+                <button
+                    id="startButton"
+                    class="primary-button"
+                    type="button">
+
+                    Start practice
+
+                    <span>
+                        →
+                    </span>
+
+                </button>
+
+
+                <p class="privacy-note">
+                    No account required. Your answers are stored only
+                    in your local database.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             INTERVIEW
+        ====================================== -->
+
+        <section
+            id="interview"
+            class="interview-card glass-card hidden">
+
+
+            <div class="session-header">
+
+                <div>
+
+                    <p class="eyebrow">
+                        CURRENT SESSION
+                    </p>
+
+                    <h3 id="roleName"></h3>
+
+                </div>
+
+
+                <div
+                    class="question-count"
+                    id="progressText">
+
+                </div>
+
+            </div>
+
+
+            <div class="progress">
+
+                <div id="progressBar"></div>
+
+            </div>
+
+
+            <!-- Question -->
+
+            <div class="question-wrap">
+
+                <span class="question-label">
+                    INTERVIEW QUESTION
+                </span>
+
+                <h2 id="question"></h2>
+
+            </div>
+
+
+            <!-- Answer -->
+
+            <label for="answer">
+                Your response
+            </label>
+
+            <textarea
+                id="answer"
+                rows="7"
+                placeholder="Write a thoughtful answer in your own words...">
+            </textarea>
+
+
+            <!-- Answer Footer -->
+
+            <div class="answer-footer">
+
+                <span id="wordCount">
+                    0 words
+                </span>
+
+
+                <button
+                    id="submitButton"
+                    class="primary-button"
+                    type="button">
+
+                    Analyse answer
+
+                    <span>
+                        →
+                    </span>
+
+                </button>
+
+            </div>
+
+
+            <!-- =================================
+                 NEW EVALUATION RESULT
+            ================================== -->
+
+            <div
+                id="feedback"
+                class="feedback hidden">
+            </div>
+
+
+            <!-- Next -->
+
+            <button
+                id="nextButton"
+                class="next-button hidden"
+                type="button">
+
+                Continue to next question
+
+                <span>
+                    →
+                </span>
+
+            </button>
+
+        </section>
+
+
+
+        <!-- =====================================
+             REPORT
+        ====================================== -->
+
+        <section
+            id="report"
+            class="report-card glass-card hidden">
+
+
+            <div class="report-top">
+
+
+                <div>
+
+                    <p class="eyebrow">
+
+                        <span class="spark">
+                            ✦
+                        </span>
+
+                        SESSION COMPLETE
+
+                    </p>
+
+
+                    <h1>
+
+                        Your performance,<br>
+
+                        <em>
+                            in focus.
+                        </em>
+
+                    </h1>
+
+
+                    <p
+                        id="reportSummary"
+                        class="lead">
+                    </p>
+
+                </div>
+
+
+                <!-- Category Only -->
+
+                <div class="score-orbit">
+
+                    <div class="score-circle">
+
+                        <strong
+                            id="overallScore">
+                        </strong>
+
+                    </div>
+
+
+                    <p
+                        id="performanceLevel">
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Review -->
+
+            <div class="review-title">
+
+                <h2>
+                    Question-by-question review
+                </h2>
+
+                <span>
+                    Personalised feedback
+                </span>
+
+            </div>
+
+
+            <div id="answerReview">
+            </div>
+
+
+            <!-- Restart -->
+
+            <button
+                id="restartButton"
+                class="primary-button"
+                type="button">
+
+                Start another practice
+
+                <span>
+                    →
+                </span>
+
+            </button>
+
+        </section>
+
+
+
+        <!-- =====================================
+             HISTORY
+        ====================================== -->
+
+        <section
+            id="history"
+            class="history-card glass-card hidden">
+
+
+            <div class="section-head">
+
+                <div>
+
+                    <p class="eyebrow">
+                        YOUR PROGRESS
+                    </p>
+
+                    <h1>
+                        Practice history
+                    </h1>
+
+                </div>
+
+
+                <button
+                    id="closeHistory"
+                    class="text-button"
+                    type="button">
+
+                    Back to home
+
+                </button>
+
+            </div>
+
+
+            <div id="historyList">
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================== -->
+
+    <footer>
+
+        <span class="brand-mark small">
+            I
+        </span>
+
+        InterviewIQ
+
+        <b>
+            ·
+        </b>
+
+        Practice sharper. Interview stronger.
+
+    </footer>
+
+
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
+
+    <script src="/static/app.js?v=10001"></script>
+
+
+    <!-- =========================================
+         OLD RESULT CLEANER
+
+         This removes any leftover result card
+         created by an old JavaScript version.
+    ========================================== -->
+
+    <script>
+
+        (function () {
+
+            function removeOldResults() {
+
+                const selectors = [
+                    ".score-result",
+                    ".evaluation-result",
+                    ".result-card",
+                    ".score-card"
+                ];
+
+                selectors.forEach(function (selector) {
+
+                    document
+                        .querySelectorAll(selector)
+                        .forEach(function (element) {
+
+                            /*
+                             * Never remove the new feedback
+                             * container.
+                             */
+                            if (
+                                element.id !== "feedback"
+                            ) {
+                                element.remove();
+                            }
+
+                        });
+
+                });
+
+
+                /*
+                 * Remove old text-based result cards
+                 * if an older script creates them
+                 * without the expected class.
+                 */
+
+                document
+                    .querySelectorAll("div")
+                    .forEach(function (element) {
+
+                        const text =
+                            element.textContent
+                                .trim();
+
+                        if (
+                            text.startsWith(
+                                "Score:"
+                            ) &&
+                            text.includes(
+                                "Similarity:"
+                            )
+                        ) {
+
+                            /*
+                             * Do not touch the
+                             * new feedback box.
+                             */
+                            if (
+                                element.id !==
+                                "feedback"
+                            ) {
+                                element.remove();
+                            }
+
+                        }
+
+                    });
+
+            }
+
+
+            /*
+             * Run immediately.
+             */
+            removeOldResults();
+
+
+            /*
+             * Keep watching the page.
+             * If old JavaScript creates the
+             * unwanted score card again,
+             * remove it immediately.
+             */
+
+            const observer =
+                new MutationObserver(
+                    function () {
+                        removeOldResults();
+                    }
+                );
+
+
+            observer.observe(
+                document.body,
+                {
+                    childList: true,
+                    subtree: true
+                }
+            );
+
+        })();
+
+    </script>
+
+</body>
+
+</html>
