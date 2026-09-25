@@ -6,7 +6,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 from . import database
-from .evaluator import evaluate_answer
+from .autosas_evaluator import evaluate_answer
 from .questions import get_questions, get_roles
 
 
@@ -63,10 +63,10 @@ def _label_from_score(score):
     except (TypeError, ValueError):
         return "Weak"
 
-    if score >= 75:
+    if score >= 0.75:
         return "Strong"
 
-    if score >= 25:
+    if score >= 0.50:
         return "Average"
 
     return "Weak"
